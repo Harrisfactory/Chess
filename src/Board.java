@@ -42,7 +42,8 @@ public class Board {
 		Piece piece = board[old_position_x][old_position_y];
 		System.out.print(piece.get_type());
 		//TODO check legal
-		
+		if(piece.get_type() == "p")
+			checkPawnMoveLegal(piece, old_position_x, old_position_y,  new_position_x, new_position_y);
 
 		//moves piece
 		this.board[new_position_x][new_position_y] = piece;
@@ -50,10 +51,21 @@ public class Board {
 	}
 	
 	public boolean checkTurnToPiece(char current_turn, int position_x, int position_y) {
-		
 		if(current_turn != this.board[position_x][position_y].get_color())
 			return false;
 		return true;
+	}
+
+	public boolean checkPawnMoveLegal(Piece pawn, int old_position_x, int old_position_y, int new_position_x, int new_position_y) {
+		//TODO check if pawn at origin
+			//TODO if at origin AND 2 moves ahead are clear AND moving doesnt put King in check, allow
+		//TODO if new pos y is +1 clear AND is chosen AND moving doesnt put King in check, allow
+
+		//TODO if 1 piece diagnal left OR right is selected, contains piece, AND does not put king in check
+
+		//TODO if new pos y is +1 clear OR if 1 piece diagnal left OR right is selected AND piece at end of board, AND does not put king in check, allow and promote
+
+		//TODO if en passant
 	}
 	
 	

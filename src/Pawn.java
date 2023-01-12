@@ -5,7 +5,6 @@ public class Pawn extends Piece {
 	
 	private char piece_color;
 	
-	
 	public Pawn(char piece_color) {
 		this.piece_color = piece_color;
 	}
@@ -24,6 +23,7 @@ public class Pawn extends Piece {
 	public String display_piece() {
 		return this.piece_color + piece_type;
 	}
+
 	
 	
 	

@@ -106,23 +106,22 @@ public class Game {
 			int new_position_x = Integer.parseInt(move_to_clean[0]);
 			int new_position_y = Integer.parseInt(move_to_clean[1]);
 			
-			board.checkTurnToPiece(current_turn, old_position_x, old_position_y);
-			
-			board.movePiece(old_position_x, old_position_y, new_position_x, new_position_y);
-			
-			board.display_board();
-			
+			boolean check_turn = board.checkTurnToPiece(current_turn, old_position_x, old_position_y);
+			if(check_turn) {
+				board.movePiece(old_position_x, old_position_y, new_position_x, new_position_y);
+				board.display_board();
+				current_turn = change_turn(current_tu1rn);
+			} else {
+				System.out.println("You cannot move your opponents piece!");
+			}
 		}
 		
 		board.display_board();
-		
 	}
 	
-	public char turn(char current_turn) {
+	public char change_turn(char current_turn) {
 		if(current_turn == 'w')
 			return current_turn = 'b';
 		return current_turn = 'w';
-		
 	}
-
 }
