@@ -60,7 +60,7 @@ public class Board {
 		//TODO check if pawn at origin
 		if(pawn.getHasMoved() == false) {
 			//TODO if at origin AND 2 moves ahead are clear AND moving doesnt put King in check, allow
-				//if has clear 2 and selected allow,
+				//if has clear 2 and selected allow
 
 		}
 		//TODO if new pos y is +1 clear AND is chosen AND moving doesnt put King in check, allow
