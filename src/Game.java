@@ -110,7 +110,7 @@ public class Game {
 			if(check_turn) {
 				board.movePiece(old_position_x, old_position_y, new_position_x, new_position_y);
 				board.display_board();
-				current_turn = change_turn(current_tu1rn);
+				current_turn = change_turn(current_turn);
 			} else {
 				System.out.println("You cannot move your opponents piece!");
 			}

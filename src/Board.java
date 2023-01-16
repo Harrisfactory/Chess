@@ -29,25 +29,30 @@ public class Board {
 	}
 	
 	public boolean isPiece(int position_x, int position_y) {
-		if(board[position_x][position_y] != null)
+		if(this.board[position_x][position_y] != null)
 			return true;
 		return false;
 	}
 	
-	
-	public void movePiece(int old_position_x, int old_position_y, int new_position_x, int new_position_y) {
+
+	//TODO make boolean based on legality of move
+	public void movePiece(int old_position_y, int old_position_x, int new_position_y, int new_position_x) {
 
 		//get piece
 		//TODO if exists
-		Piece piece = board[old_position_x][old_position_y];
+		Piece piece = board[old_position_y][old_position_x];
 		System.out.print(piece.get_type());
 		//TODO check legal
-		if(piece.get_type() == "p")
-			checkPawnMoveLegal(piece, old_position_x, old_position_y,  new_position_x, new_position_y);
+		if(piece.get_type() == "p") {
+			Pawn pawn = (Pawn)piece;
+			boolean is_legal = checkPawnMoveLegal(pawn, old_position_y, old_position_x,  new_position_y, new_position_x);
+			if(is_legal == false)
+				return;
+		}
 
 		//moves piece
-		this.board[new_position_x][new_position_y] = piece;
-		this.board[old_position_x][old_position_y] = null;
+		this.board[new_position_y][new_position_x] = piece;
+		this.board[old_position_y][old_position_x] = null;
 	}
 	
 	public boolean checkTurnToPiece(char current_turn, int position_x, int position_y) {
@@ -56,12 +61,30 @@ public class Board {
 		return true;
 	}
 
-	public boolean checkPawnMoveLegal(Pawn pawn, int old_position_x, int old_position_y, int new_position_x, int new_position_y) {
+	public boolean checkPawnMoveLegal(Pawn pawn, int old_position_y, int old_position_x, int new_position_y, int new_position_x) {
 		//TODO check if pawn at origin
 		if(pawn.getHasMoved() == false) {
-			//TODO if at origin AND 2 moves ahead are clear AND moving doesnt put King in check, allow
-				//if has clear 2 and selected allowg
+			//TODO up to 2 moves ahead are clear AND moving doesn't put King in check, allow
+				//if pawn is at origin
+				//if has clear 2 and selected allow
+				if(new_position_y <= 2 + old_position_y) {
+					//TODO check if king is not in check
+					//check clear
+					int pawn_move_count = old_position_y - 1;
+					while(pawn_move_count >= new_position_y) {
+						//is this place clear or does it have a piece?
+						System.out.print(isPiece(new_position_x, pawn_move_count));
+						if(isPiece(new_position_x, pawn_move_count)) {
+							System.out.println("Your piece is colliding");
+							return false;
+						}
+						pawn_move_count--;
+					}
 
+					return true;
+				}
+
+			return true;
 		}
 		//TODO if new pos y is +1 clear AND is chosen AND moving doesnt put King in check, allow
 
@@ -70,6 +93,7 @@ public class Board {
 		//TODO if new pos y is +1 clear OR if 1 piece diagnal left OR right is selected AND piece at end of board, AND does not put king in check, allow and promote
 
 		//TODO if en passant
+		return true;
 	}
 	
 	
