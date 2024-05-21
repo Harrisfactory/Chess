@@ -1,0 +1,3 @@
+/Users/hschrick/projects/cpp_projects/Chess/cmake-build-debug/CMakeFiles/Chess.dir
+/Users/hschrick/projects/cpp_projects/Chess/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/hschrick/projects/cpp_projects/Chess/cmake-build-debug/CMakeFiles/rebuild_cache.dir
