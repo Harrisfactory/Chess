@@ -129,9 +129,9 @@ public:
 class Board {
 private:
     Piece* board[8][8];
+    std::string currentTurn = "white";
 
 public:
-
     Board() {
         //init Board with nullptrs
         for (int y = 0; y < 8; y++) {
@@ -158,12 +158,23 @@ public:
         }
     }
 
+    void changeTurn() {
+        if (this->currentTurn == "white") {
+            this->currentTurn = "black";
+            return;
+        }
+        this->currentTurn = "white";
+        return;
+    }
+
+    std::string getTurn() {
+        return this->currentTurn;
+    }
 };
 
 int main(int argc, char* argv[]) {
     //create board
     Board chessBoard;
-
     //create white pawns
     chessBoard.placePiece(1, 0, new Pawn("W"));
     chessBoard.placePiece(1, 1, new Pawn("W"));
@@ -210,11 +221,16 @@ int main(int argc, char* argv[]) {
     //create white king
     chessBoard.placePiece(7, 3, new King("B"));
 
-
-
     chessBoard.displayBoard();
 
-
-
+    //init gameloop
+    bool live_game = true;
+    int tst_ctr = 0;
+    while (live_game || tst_ctr < 7) {
+        std::cout << chessBoard.getTurn();
+        chessBoard.changeTurn();
+        tst_ctr++;
+        live_game = false;
+    }
 
 }
