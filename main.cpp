@@ -170,6 +170,21 @@ public:
     std::string getTurn() {
         return this->currentTurn;
     }
+
+    //attempts to move a piece from one position of board to another
+    void movePiece(int from_x, int from_y, int to_x, int to_y) {
+        //todo: check piece legality
+            //identify piece
+
+            //piece operations map based on piece current location and type
+            //find legal options based on map -><- current board
+
+            //if legal move execute, if not legal just end the game for now
+        //move piece
+        board[to_y][to_x] = board[from_x][from_y];
+        //disapear where piece moved
+        board[from_x][from_y] = nullptr;
+    }
 };
 
 int main(int argc, char* argv[]) {
@@ -223,14 +238,32 @@ int main(int argc, char* argv[]) {
 
     chessBoard.displayBoard();
 
+     
     //init gameloop
     bool live_game = true;
     int tst_ctr = 0;
-    while (live_game || tst_ctr < 7) {
-        std::cout << chessBoard.getTurn();
-        chessBoard.changeTurn();
-        tst_ctr++;
+    while (live_game) {
+        //std::cout << chessBoard.getTurn();
+        int from_x;
+        int from_y;
+        int to_x;
+        int to_y;
+        std::cout << "move from x: ";
+        std::cin >> from_x;
+        std::cout << "move from y: ";
+        std::cin >> from_y;
+        std::cout << "move to x: ";
+        std::cin >> to_x;
+        std::cout << "move to y: ";
+        std::cin >> to_y;
+        //std::cout << "-" << from_x << from_y << to_x << to_y; //remove this line after debug
+        //attempt to place the piece
+        chessBoard.movePiece(from_x, from_y, to_x, to_y);
+        //display board
+        chessBoard.displayBoard();
+        //chessBoard.changeTurn();
+
+
         live_game = false;
     }
-
 }
